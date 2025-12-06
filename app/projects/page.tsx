@@ -14,11 +14,15 @@ export const metadata: Metadata = {
 
 const projects = [
 	{ slug: projectSlugs.omnibin, title: "omnib.in", coverImage: "/projects/omnibin/cover.png" },
-	{ slug: projectSlugs.masahiroLamarsh, title: "Masahiro Lamarsh", coverImage: "/projects/masa/cover.png" },
 	{
 		slug: projectSlugs.generativeArtPlayground,
 		title: "Generative Art Playground",
 		coverImage: "/projects/playground/cover.png",
+	},
+	{
+		slug: projectSlugs.masahiroLamarsh,
+		title: "Masahiro Lamarsh",
+		coverImage: "/projects/masa/cover.png",
 	},
 ];
 
@@ -46,7 +50,7 @@ export default function Page() {
 				})}
 			</div>
 			<p className="mt-12 text-sm text-muted-foreground">
-				* These are projects I've worked on in my free time. For my professional work, see the{" "}
+				* These are projects I&apos;ve worked on in my free time. For my professional work, see the{" "}
 				<Link href={routes.experience} className="text-foreground underline hover:no-underline">
 					experience
 				</Link>{" "}
