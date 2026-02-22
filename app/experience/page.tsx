@@ -13,6 +13,15 @@ export const metadata: Metadata = {
 
 const experiences = [
 	{
+		company: "Cloudflare",
+		position: "Sr Systems Engineer",
+		dateRange: "Feb 2026 - Present",
+		logo: "/experience-logos/cloudflare.webp",
+		logoAlt: "Cloudflare logo",
+		invertLight: false,
+		invertDark: true,
+	},
+	{
 		company: "ProService",
 		position: "Sr Staff Software Engineer",
 		dateRange: "Mar 2024 - Jun 2025",
@@ -56,15 +65,6 @@ const experiences = [
 		logoAlt: "Lightbulb emoji",
 		invertLight: false,
 		invertDark: false,
-	},
-	{
-		company: "The Forge",
-		position: "Software Engineer",
-		dateRange: "Jan 2017 - Jan 2019",
-		logo: "/experience-logos/forge.webp",
-		logoAlt: "The Forge logo",
-		invertLight: false,
-		invertDark: true,
 	},
 ];
 

@@ -23,6 +23,9 @@ export const companyLinks = {
 	statusphere: "https://www.joinstatus.com/",
 	cision: "https://www.cision.com/",
 	featured: "https://www.featured.com/",
+	cloudflare: "https://www.cloudflare.com/",
+	cloudflareDocs: "https://developers.cloudflare.com/",
+	cloudflareBlog: "https://blog.cloudflare.com/",
 } as const;
 
 // Project Links

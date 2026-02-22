@@ -26,8 +26,38 @@ export default function Home() {
 					Hi, I&#39;m Vance — I <Love /> building software.
 				</p>
 				<p>
-					I'm a software engineer with a knack for the front-end, currently based in DFW, Texas.
-					Most recently, I was a founding engineer and front-end lead at{" "}
+					I&apos;m a Sr Systems Engineer at{" "}
+					<Link
+						href={companyLinks.cloudflare}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-foreground underline hover:no-underline"
+					>
+						Cloudflare
+					</Link>
+					, working on the Content Engineering team, helping improve Cloudflare&apos;s static
+					content like the{" "}
+					<Link
+						href={companyLinks.cloudflareDocs}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-foreground underline hover:no-underline"
+					>
+						developer docs
+					</Link>{" "}
+					and{" "}
+					<Link
+						href={companyLinks.cloudflareBlog}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-foreground underline hover:no-underline"
+					>
+						blog
+					</Link>
+					.
+				</p>
+				<p>
+					Before that, I was a founding engineer and front-end lead at{" "}
 					<Link
 						href={companyLinks.proservice}
 						target="_blank"
@@ -36,10 +66,11 @@ export default function Home() {
 					>
 						ProService Hawaii
 					</Link>
-					, the largest Professional Employer Organization in Hawaii. I established the foundational
-					architecture, development processes, and best practices for the engineering organization.
-					I led the effort to build a performant, accessible design system and designed many of the
-					application's core features, helping build the best PEO software in Hawaii.
+					, the largest Professional Employer Organization in Hawaii, where I established the
+					foundational architecture, development processes, and best practices for the engineering
+					organization. I led the effort to build a performant, accessible design system and
+					designed many of the application&apos;s core features, helping build the best PEO software
+					in Hawaii.
 				</p>
 				<p>
 					I got my start building software at{" "}
@@ -70,7 +101,7 @@ export default function Home() {
 						real-time status viewer
 					</Link>{" "}
 					for all the machinery in the forge, where students can remotely see which machines are in
-					use and when they'll be available. Students still use it today.
+					use and when they&apos;ll be available. Students still use it today.
 				</p>
 				<p>
 					After that, I worked at the Lighting Research Center at RPI as the lead engineer. We got
@@ -132,10 +163,10 @@ export default function Home() {
 					>
 						Featured.com
 					</Link>
-					. I got to lead front-end teams across multiple efforts and also led the organization's
-					"Frontend Engineering Club," mentoring rising engineers. My experience at Cision taught me
-					how to navigate the complexities of large organizations and cut through bureaucracy to
-					make real impact.
+					. I got to lead front-end teams across multiple efforts and also led the
+					organization&apos;s &quot;Frontend Engineering Club,&quot; mentoring rising engineers. My
+					experience at Cision taught me how to navigate the complexities of large organizations and
+					cut through bureaucracy to make real impact.
 				</p>
 				<p>
 					These days, I&#39;m focused on building things that feel good to use and stand the test of
