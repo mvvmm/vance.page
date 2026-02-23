@@ -9,6 +9,18 @@
 		"binding": "ASSETS",
 	},
 	"keep_names": false,
+	"r2_buckets": [
+		{
+			"binding": "NEXT_INC_CACHE_R2_BUCKET",
+			"bucket_name": "personal-website-cache",
+		},
+	],
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "personal-website",
+		},
+	],
 	"observability": {
 		"logs": {
 			"enabled": true,
