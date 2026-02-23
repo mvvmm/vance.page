@@ -4,8 +4,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"test": "test",
-		"opennext-build": "opennextjs-cloudflare build",
+		"worker-build": "opennextjs-cloudflare build && opennextjs-cloudflare populateCache local",
 		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
 		"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
