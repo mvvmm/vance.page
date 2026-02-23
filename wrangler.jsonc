@@ -9,4 +9,10 @@
 		"binding": "ASSETS",
 	},
 	"keep_names": false,
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true,
+		},
+	},
 }
