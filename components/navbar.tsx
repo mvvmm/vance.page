@@ -9,7 +9,7 @@ export default function Navbar() {
 	const pathname = usePathname();
 
 	const isActive = (path: string) =>
-		pathname === path || (path === routes.projects && pathname.startsWith(routes.projects));
+		pathname === path || (path !== routes.home && pathname.startsWith(path));
 
 	const linkClass = (path: string) =>
 		cn(

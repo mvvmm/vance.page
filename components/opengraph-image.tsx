@@ -16,6 +16,7 @@ export interface OpengraphImageProps {
 	photoBase64?: string;
 	fontFamily: string;
 	nameOnly?: boolean;
+	smallTitle?: boolean;
 }
 
 export interface OpengraphImageData {
@@ -96,6 +97,7 @@ function OpengraphImage({
 	photoBase64,
 	fontFamily,
 	nameOnly = false,
+	smallTitle = false,
 }: OpengraphImageProps) {
 	return (
 		<div
@@ -172,13 +174,13 @@ function OpengraphImage({
 							width: "100%",
 						}}
 					>
-						{/* Page name in large font */}
+						{/* Page name */}
 						<div
 							style={{
-								fontSize: "120px",
+								fontSize: smallTitle ? "56px" : "120px",
 								fontWeight: "500",
 								color: "#ffffff",
-								lineHeight: "1",
+								lineHeight: smallTitle ? "1.15" : "1",
 								marginBottom: "24px",
 								letterSpacing: "-0.02em",
 							}}
@@ -244,9 +246,11 @@ function OpengraphImage({
 export async function generateOpengraphImage({
 	pageName,
 	nameOnly = false,
+	smallTitle = false,
 }: {
 	pageName: string;
 	nameOnly?: boolean;
+	smallTitle?: boolean;
 }): Promise<OpengraphImageData> {
 	const geistFonts = await loadGeistFonts();
 	const photoBase64 = await loadPhotoBase64();
@@ -259,6 +263,7 @@ export async function generateOpengraphImage({
 				photoBase64={photoBase64}
 				fontFamily={fontFamily}
 				nameOnly={nameOnly}
+				smallTitle={smallTitle}
 			/>
 		),
 		options: getImageResponseOptions(geistFonts),

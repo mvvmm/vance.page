@@ -165,3 +165,78 @@
 		cursor: pointer;
 	}
 }
+
+/* rehype-pretty-code dual-theme support */
+code[data-theme*=" "] span {
+	color: var(--shiki-light);
+}
+
+.dark code[data-theme*=" "] span {
+	color: var(--shiki-dark);
+}
+
+figure[data-rehype-pretty-code-figure] .code-block-wrapper {
+	overflow-x: auto;
+}
+
+figure[data-rehype-pretty-code-figure] pre {
+	@apply rounded-lg border border-border text-sm p-4 m-0;
+	background-color: var(--secondary) !important;
+}
+
+figure[data-rehype-pretty-code-figure]:has([data-rehype-pretty-code-title]) {
+	@apply rounded-lg border border-border;
+	background-color: var(--secondary);
+}
+
+figure[data-rehype-pretty-code-figure] [data-rehype-pretty-code-title] {
+	@apply px-4 py-0 text-xs text-muted-foreground font-mono;
+}
+
+figure[data-rehype-pretty-code-figure]:has([data-rehype-pretty-code-title]) pre {
+	@apply border-0 rounded-none rounded-b-lg;
+}
+
+/* Hide inner copy button when figure has its own */
+figure[data-has-title] .copy-button-inner {
+	@apply hidden;
+}
+
+figure[data-rehype-pretty-code-figure] code {
+	@apply grid;
+	counter-reset: line;
+	background-color: transparent !important;
+}
+
+figure[data-rehype-pretty-code-figure] [data-line] {
+	@apply px-1;
+}
+
+/* Inline code within prose should not inherit pre styling */
+:where(.prose) :not(pre) > code {
+	@apply rounded px-1.5 py-0.5 text-sm;
+	background-color: var(--accent);
+}
+
+:where(.prose) :not(pre) > code::before,
+:where(.prose) :not(pre) > code::after {
+	content: none;
+}
+
+/* Heading anchor links */
+:where(.prose) :is(h2, h3, h4) {
+	@apply relative;
+}
+
+:where(.prose) .heading-link {
+	@apply no-underline text-inherit;
+}
+
+:where(.prose) .heading-link::before {
+	content: "#";
+	@apply absolute -left-6 text-muted-foreground opacity-0;
+}
+
+:where(.prose) :is(h2, h3, h4):hover .heading-link::before {
+	@apply opacity-100;
+}

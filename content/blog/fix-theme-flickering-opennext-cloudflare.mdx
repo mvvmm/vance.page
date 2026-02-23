@@ -1,0 +1,55 @@
+---
+title: "Fix Theme Flickering with next-themes on Cloudflare with OpenNext"
+date: "2025-02-22"
+description: "How to fix the white flash on dark mode when deploying a Next.js app with next-themes to Cloudflare Workers using OpenNext."
+---
+
+If you've deployed a Next.js app to Cloudflare Workers using [OpenNext](https://opennext.js.org/) and [next-themes](https://github.com/pacocoursey/next-themes), you've probably noticed a white flash on page load when using dark mode. The theme loads correctly after hydration, but for a brief moment the page renders with the wrong theme.
+
+This post is specifically about the flickering that happens when using `next-themes` with OpenNext on Cloudflare. If you're seeing the flash when running `next dev` locally, the issue is likely with your `next-themes` setup itself — check the [next-themes docs](https://github.com/pacocoursey/next-themes) for proper configuration.
+
+## Why it happens
+
+`next-themes` works by injecting an inline `<script>` into the `<head>` that reads the user's preference from `localStorage` (or the system setting) and applies it before the browser paints. This prevents the [Flash of inAccurate coloR Theme (FART)](https://css-tricks.com/flash-of-inaccurate-color-theme-fart/) that you'd get if you waited for React to hydrate.
+
+On Cloudflare, two things can interfere with this script. First, Cloudflare's bundler (ESBuild) can inject code into the inline script that causes it to error out entirely, meaning the theme class never gets applied. Second, if you have Cloudflare Rocket Loader enabled, it will defer the script so it runs after the first paint instead of before it. You may need to fix one or both depending on your setup.
+
+## Fix 1: Disable `keep_names` in wrangler
+
+By default, Cloudflare's bundler (ESBuild) injects `__name` helper calls to preserve function names during minification. These injections can leak into the inline `<script>` that `next-themes` outputs, causing it to error out before it can apply the theme class.
+
+You can reproduce the issue locally by running `opennextjs-cloudflare preview` (`pnpm preview` by default) — the ESBuild bundling only happens during the Cloudflare build, not during `next dev`.
+
+The fix is to set `keep_names: false` in your `wrangler.jsonc`:
+
+```json title="wrangler.jsonc"
+{
+	// ...
+	"keep_names": false
+}
+```
+
+This tells ESBuild to skip the `__name` injections, so the `next-themes` script stays clean and runs correctly in the browser. See the [OpenNext docs on `keep_names`](https://opennext.js.org/cloudflare/howtos/keep_names#how-to-fix-such-issues) and [this GitHub issue](https://github.com/pacocoursey/next-themes/pull/354) for more context.
+
+## Fix 2: Disable Rocket Loader for the theme script
+
+If you're using [Cloudflare Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/), it will defer all inline scripts — including the one `next-themes` injects to apply the theme before paint. This defeats the entire purpose of the script and causes the flash.
+
+You can tell Rocket Loader to leave a specific script alone by adding `data-cfasync="false"`. `next-themes` supports this via the `scriptProps` prop on `ThemeProvider`:
+
+```tsx title="app/layout.tsx"
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+	return (
+		<html lang="en" suppressHydrationWarning>
+			<body>
+				<ThemeProvider attribute="class" scriptProps={{ "data-cfasync": "false" }}>
+					{/* ... */}
+					{children}
+				</ThemeProvider>
+			</body>
+		</html>
+	);
+}
+```
+
+This adds `data-cfasync="false"` to the inline script that `next-themes` injects, telling Rocket Loader to leave it alone so it runs before the first paint. See the [next-themes Rocket Loader docs](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#using-with-cloudflare-rocket-loader) for more details.

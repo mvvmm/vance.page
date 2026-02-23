@@ -8,6 +8,7 @@ export const routes = {
 	about: "/",
 	experience: "/experience",
 	projects: "/projects",
+	blog: "/blog",
 	contact: "/contact",
 } as const;
 
@@ -21,6 +22,11 @@ export const projectSlugs = {
 // Helper function to build project route
 export function getProjectRoute(slug: string): string {
 	return `${routes.projects}/${slug}`;
+}
+
+// Helper function to build blog route
+export function getBlogRoute(slug: string): string {
+	return `${routes.blog}/${slug}`;
 }
 
 // Navigation Items
@@ -38,10 +44,14 @@ export const navItems = [
 		href: routes.projects,
 	},
 	{
+		label: "Blog",
+		href: routes.blog,
+	},
+	{
 		label: "Contact",
 		href: routes.contact,
 	},
 ] as const;
 
 // All routes for sitemap and robots
-export const allRoutes = [routes.home, routes.experience, routes.projects, routes.contact] as const;
+export const allRoutes = [routes.home, routes.experience, routes.projects, routes.blog, routes.contact] as const;
