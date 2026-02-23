@@ -3,8 +3,6 @@ import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import { routes, getBlogRoute } from "@/lib/routes";
 
-export const dynamic = "force-static";
-
 export const metadata: Metadata = {
 	title: "Blog",
 	description: "Writing about web development, infrastructure, and things I've learned.",
