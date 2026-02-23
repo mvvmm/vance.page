@@ -1,18 +1,18 @@
 ---
-title: "Fix Theme Flickering with next-themes on Cloudflare with OpenNext"
+title: "Fix Theme Flickering with next-themes on Cloudflare workers with OpenNext"
 date: "2025-02-22"
 description: "How to fix the white flash on dark mode when deploying a Next.js app with next-themes to Cloudflare Workers using OpenNext."
 ---
 
-If you've deployed a Next.js app to Cloudflare Workers using [OpenNext](https://opennext.js.org/) and [next-themes](https://github.com/pacocoursey/next-themes), you've probably noticed a white flash on page load when using dark mode. The theme loads correctly after hydration, but for a brief moment the page renders with the wrong theme.
+If you've deployed a Next.js app to Cloudflare Workers using [OpenNext](https://opennext.js.org/) and [next-themes](https://github.com/pacocoursey/next-themes), you've probably noticed a white flash on page load when using dark mode (or vice versa). The theme loads correctly after hydration, but for a brief moment the page renders with the wrong theme.
 
-This post is specifically about the flickering that happens when using `next-themes` with OpenNext on Cloudflare. If you're seeing the flash when running `next dev` locally, the issue is likely with your `next-themes` setup itself — check the [next-themes docs](https://github.com/pacocoursey/next-themes) for proper configuration.
+This post is specifically about the flickering that happens when using `next-themes` with OpenNext on Cloudflare workers. If you're seeing the flash when running `next dev` locally, the issue is likely with your `next-themes` setup itself — check the [next-themes docs](https://github.com/pacocoursey/next-themes) for proper configuration.
 
 ## Why it happens
 
 `next-themes` works by injecting an inline `<script>` into the `<head>` that reads the user's preference from `localStorage` (or the system setting) and applies it before the browser paints. This prevents the [Flash of inAccurate coloR Theme (FART)](https://css-tricks.com/flash-of-inaccurate-color-theme-fart/) that you'd get if you waited for React to hydrate.
 
-On Cloudflare, two things can interfere with this script. First, Cloudflare's bundler (ESBuild) can inject code into the inline script that causes it to error out entirely, meaning the theme class never gets applied. Second, if you have Cloudflare Rocket Loader enabled, it will defer the script so it runs after the first paint instead of before it. You may need to fix one or both depending on your setup.
+On Cloudflare workers, two things can interfere with this script. First, Cloudflare worker's bundler (ESBuild) can inject code into the inline script that causes it to error out entirely, meaning the theme class never gets applied. Second, if you have Cloudflare Rocket Loader enabled, it will defer the script so it runs after the first paint instead of before it. You may need to fix one or both depending on your setup.
 
 ## Fix 1: Disable `keep_names` in wrangler
 
