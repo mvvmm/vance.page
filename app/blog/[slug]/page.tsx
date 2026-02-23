@@ -8,6 +8,7 @@ import { getBlogRoute } from "@/lib/routes";
 import { mdxComponents } from "@/components/mdx-components";
 import cursorDark from "@/lib/themes/cursor-dark.json";
 
+export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
