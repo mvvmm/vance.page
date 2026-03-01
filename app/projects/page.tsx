@@ -6,13 +6,14 @@ import { routes, getProjectRoute, projectSlugs } from "@/lib/routes";
 export const metadata: Metadata = {
 	title: "Projects",
 	description:
-		"Selected projects including Masahiro Lamarsh, Omnibin, and Generative Art Playground.",
+		"Selected projects including IMAX Near Me, Omnibin, Masahiro Lamarsh, and Generative Art Playground.",
 	alternates: {
 		canonical: `${process.env.NEXT_PUBLIC_BASE_URL}${routes.projects}`,
 	},
 };
 
 const projects = [
+	{ slug: projectSlugs.imaxNearMe, title: "IMAX Near Me", coverImage: "/projects/imax-near-me/preview.png" },
 	{ slug: projectSlugs.omnibin, title: "omnib.in", coverImage: "/projects/omnibin/cover.png" },
 	{
 		slug: projectSlugs.generativeArtPlayground,
@@ -33,13 +34,13 @@ export default function Page() {
 				{projects.map((project) => {
 					return (
 						<Link key={project.slug} href={getProjectRoute(project.slug)} className="group block">
-							<div className="mb-4">
+							<div className="mb-4 aspect-[5/3] relative overflow-hidden rounded-lg">
 								<Image
 									src={project.coverImage}
 									alt={project.title}
 									width={1000}
 									height={600}
-									className="w-full h-auto rounded-lg transition-opacity group-hover:opacity-80"
+									className="w-full h-full object-cover object-top transition-opacity group-hover:opacity-80"
 								/>
 							</div>
 							<h2 className="text-xl font-medium text-foreground group-hover:underline">

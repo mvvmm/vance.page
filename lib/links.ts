@@ -30,6 +30,10 @@ export const companyLinks = {
 
 // Project Links
 export const projectLinks = {
+	imaxNearMe: {
+		github: "https://github.com/mvvmm/imax-near-me",
+		web: "https://imaxnearme.com",
+	},
 	generativeArtPlayground: {
 		website: "https://www.mvvmm.com",
 		github: "https://github.com/mvvmm/mvvmm.com",

@@ -14,6 +14,7 @@ export const routes = {
 
 // Project Slugs
 export const projectSlugs = {
+	imaxNearMe: "imax-near-me",
 	omnibin: "omnibin",
 	masahiroLamarsh: "masahiro-lamarsh",
 	generativeArtPlayground: "generative-art-playground",
