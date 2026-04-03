@@ -36,10 +36,10 @@ export const navItems = [
 		label: "About",
 		href: routes.home,
 	},
-	{
-		label: "Experience",
-		href: routes.experience,
-	},
+	// {
+	// 	label: "Experience",
+	// 	href: routes.experience,
+	// },
 	{
 		label: "Projects",
 		href: routes.projects,
@@ -55,4 +55,4 @@ export const navItems = [
 ] as const;
 
 // All routes for sitemap and robots
-export const allRoutes = [routes.home, routes.experience, routes.projects, routes.blog, routes.contact] as const;
+export const allRoutes = [routes.home, /* routes.experience, */ routes.projects, routes.blog, routes.contact] as const;
